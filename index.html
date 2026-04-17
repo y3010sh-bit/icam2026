@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i-CAM 2026 | IIT Jodhpur</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#f5f5f5; }
+
+    /* Header */
+    .iit-header {
+      background:#fff;
+      border-bottom:3px solid #8B0000;
+      padding:10px 0;
+    }
+    .iit-header img { height:80px; }
+    .iit-title { font-size:22px; font-weight:bold; color:#002147; }
+    .iit-subtitle { font-size:18px; }
+
+    /* Navigation (Tabs Style - Previous Working Version) */
+    .nav-tabs-custom {
+      background:#002147;
+    }
+    .nav-tabs-custom .nav-link {
+      color:#fff;
+      padding:12px 18px;
+      font-weight:500;
+      border:none;
+    }
+    .nav-tabs-custom .nav-link:hover {
+      background:#8B0000;
+      color:#fff;
+    }
+
+    /* Hero with background image */
+    /* Hero with background image */
+    .hero {
+      position: relative;
+      background: url('assets/images/hero.jpeg') center/cover no-repeat;
+      width: 100%;
+      aspect-ratio: 14400 / 6336; /* maintain original image proportion */
+      max-height: 600px; /* prevents excessive height on large screens */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    /* Dark overlay for readability */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .hero-subtitle {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-family: 'Playfair Display', serif; /* closer to logo style */
+      letter-spacing: 1px;
+    }
+
+    /* Strong italic for logo-style 'i' */
+    .hero-title i {
+      font-style: italic;
+      display: inline-block;
+      transform: skewX(-15deg);
+    }
+
+    /* Strong italic for logo-style 'i' */
+    .hero-title i {
+      font-style: italic;
+      display: inline-block;
+      transform: skewX(-12deg);
+    }
+
+    .hero-date {
+      font-size: 20px;
+      margin-top: 5px;
+    }
+
+    /* Countdown Timer */
+    .countdown {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* Sections */
+    .section { padding:40px 0; }
+    .content-box {
+      background:#fff;
+      border:1px solid #ddd;
+      padding:25px;
+      border-radius:6px;
+    }
+
+    /* Scrollable tabs for mobile */
+    #aboutTabs {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #aboutTabs .nav-item {
+      flex: 0 0 auto;
+    }
+
+    #aboutTabs::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    #aboutTabs::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+
+    .section-title {
+      border-left:5px solid #8B0000;
+      padding-left:10px;
+      margin-bottom:15px;
+      font-weight:bold;
+    }
+
+    /* Premium Social Bar */
+    .social-bar {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 999;
+    }
+
+    .social-bar a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin: 6px 0;
+      color: #fff;
+      font-size: 20px;
+      border-radius: 30px 0 0 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    /* Hover expansion */
+    .social-bar a:hover {
+      width: 70px;
+      transform: translateX(-5px) scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Platform colors */
+    .social-linkedin { background:#0A66C2; }
+    .social-youtube { background:#FF0000; }
+    .social-instagram {
+      background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF,#515BD4);
+    }
+
+    /* Glow effect */
+    .social-linkedin:hover { box-shadow: 0 0 12px #0A66C2; }
+    .social-youtube:hover { box-shadow: 0 0 12px #FF0000; }
+    .social-instagram:hover { box-shadow: 0 0 12px #DD2A7B; }
+
+    footer {
+      background:#002147;
+      color:#fff;
+      padding:25px 0 10px;
+      font-size:14px;
+    }
+
+    .footer-top {
+      border-bottom:1px solid rgba(255,255,255,0.2);
+      padding-bottom:15px;
+      margin-bottom:10px;
+    }
+
+    .footer-links a {
+      color:#fff;
+      margin:0 10px;
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    .footer-links a:hover {
+      text-decoration:underline;
+      color:#FFD700;
+    }
+
+    .footer-bottom {
+      font-size:13px;
+      color:#ccc;
+    }
+  
+    /* Committee (refined, stable) */
+    .committee-section .group-title {
+      margin-top: 30px;
+      margin-bottom: 25px; /* more gap before images */
+      font-weight: 600;
+      color: #002147;
+      text-align: center;
+      font-size: 18px;
+    }
+    .member {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .member-img {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      object-position: 50% 40%;
+      border-radius: 50%;
+      margin-bottom: 8px;
+      border: 4px solid transparent;
+      background: linear-gradient(white, white) padding-box,
+                  linear-gradient(135deg, #FFD700, #D4AF37, #FFF8DC, #D4AF37) border-box;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    /* Glow + shine effect */
+    .member-img:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.8),
+                  0 0 25px rgba(255, 215, 0, 0.6);
+    }
+
+    .member-img::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+      transform: skewX(-25deg);
+    }
+
+    .member-img:hover::after {
+      left: 125%;
+      transition: 0.7s;
+    }
+
+    /* Patron larger for hierarchy */
+    .img-patron {
+      width: 210px;
+      height: 210px;
+      object-position: 50% 38%;
+    }
+    /* Fine-tuned per role for better framing */
+    .img-patron { object-position: 50% 38%; }
+    .img-honorary {
+      object-position: 50% 62%;
+      image-rendering: auto;
+      transform: scale(1.12); /* slight zoom for sharper face framing */
+    }
+    .img-chair { object-position: 50% 42%; }
+    .img-co { object-position: 50% 45%; }
+    /* Adjust crop position for specific images */
+    .img-honorary {
+      object-position: 50% 65%;
+      image-rendering: auto;
+    }
+    .member-name {
+      font-weight: 600;
+      margin-top: 12px; /* uniform spacing from image */
+    }
+    .member-aff { color: #555; font-size: 14px; }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+
+<body>
+
+<!-- Social Bar -->
+<div class="social-bar">
+  <!-- Replace # with your actual social media links -->
+  <a href="https://www.linkedin.com/in/department-of-materials-engineering-iit-jodhpur-935703295/recent-activity/all/" target="_blank" class="social-linkedin"><i class="fab fa-linkedin-in"></i></a>
+  <a href="https://www.youtube.com/@IITJodhpurOfficial" target="_blank" class="social-youtube"><i class="fab fa-youtube"></i></a>
+  <a href="https://www.instagram.com/iitj_official_account/" target="_blank" class="social-instagram"><i class="fab fa-instagram"></i></a>
+</div>
+
+<!-- Header -->
+<div class="iit-header">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <img src="assets/images/iitj_logo.png" class="me-3">
+      <div>
+        <div class="iit-title">Department of Materials Engineering</div>
+        <div class="iit-subtitle">Indian Institute of Technology Jodhpur</div>
+      </div>
+    </div>
+    <img src="assets/images/icam_logo.png">
+  </div>
+</div>
+
+<!-- Navigation Tabs (Reverted) -->
+<nav class="nav nav-tabs nav-tabs-custom justify-content-center sticky-top">
+  <a class="nav-link" href="#about">About</a>
+  <a class="nav-link" href="#themes">Themes</a>
+  <a class="nav-link" href="#dates">Important Dates</a>
+  <a class="nav-link" href="#committee">Committee</a>
+  <a class="nav-link" href="#programme">Programme</a>
+  <a class="nav-link" href="#logistics">Logistics</a>
+  <a class="nav-link" href="#downloads">Downloads</a>
+  <a class="nav-link" href="#abstract">Abstract</a>
+  <a class="nav-link" href="#registration">Registration</a>
+  <a class="nav-link" href="#sponsorship">Sponsorship & Exhibition</a>
+  <a class="nav-link" href="#contact">Contact</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h3 class="hero-subtitle">International Conference on Applied Materials</h3>
+    <h1 class="hero-title"><b><i>i</i>-CAM 2026</b></h1>
+    <p class="hero-date"><b>23–25 October 2026 | IIT Jodhpur</b></p>
+  </div>
+    </section>
+
+
+
+<!-- About (Tabbed Section) -->
+<section id="about" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">About</h4>
+
+    <!-- Tabs -->
+    <ul class="nav nav-pills mb-3" id="aboutTabs">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#about1">About the Conference</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#about2">Objectives</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#about3">About DME</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#about4">About IIT Jodhpur</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#about5">About Jodhpur</button></li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="about1">
+        <p>The International Conference on Applied Materials (i-CAM 2026) brings together researchers, academicians, and industry professionals.</p>
+      </div>
+
+      <div class="tab-pane fade" id="about2">
+        <p>To promote research collaboration, knowledge exchange, and innovation in materials science and engineering.</p>
+      </div>
+
+      <div class="tab-pane fade" id="about3">
+        <p style="text-align: justify;">
+        The Department of Materials Engineering at IIT Jodhpur was established in 2017, and the Department is committed to high-quality education and research in the broad area of Materials Engineering. The Department continuously strives for excellence in teaching and research through innovative pedagogy and curriculum, by undertaking interdisciplinary projects, and through active collaborations with industries, R&D labs, and academia. By enabling the students to think independently and equipping them with relevant skill sets, our goal is to encourage the graduates to innovate and address present-day materials challenges to meet the needs of the country.
+        </p>
+
+        <p style="text-align: justify;">
+        At present, the Department offers B.Tech., M.Tech., and Ph.D. programs. The Department's teaching and research activities cover four major streams- structural materials, functional materials, computational materials engineering, and process metallurgy. From structural materials to semiconductors, we attempt to understand the processing, composition and structure, properties, and performance of materials for deriving novel, effective, and sustainable alternatives. Currently, efforts are being made to introduce advanced concepts such as smart materials, additive manufacturing, artificial intelligence and machine learning, sensor materials, etc., as a part of solving interdisciplinary problems requiring Materials Engineering knowledge.
+        </p>
+      </div>
+
+      <div class="tab-pane fade" id="about4">
+        <p style="text-align: justify;">
+        Indian Institute of Technology Jodhpur was established in 2008 to foster technology education and research in India. The Institute is committed to technological thought and action to benefit the economic development of the country. Scholarship in teaching and learning, scholarship in research and creative accomplishments, and relevance to industry are the three driving forces at IIT Jodhpur.
+        </p>
+
+        <p style="text-align: justify;">
+        IIT Jodhpur functions from its sprawling residential permanent campus of 852 acres on National Highway 65, north-northwest of Jodhpur towards Nagaur. This campus is meticulously planned and envisioned to stand as a symbol of academics – simple yet profound.
+        </p>
+
+        <p style="text-align: justify;">
+        The Institute is committed to a multidisciplinary approach to technology development. Hence, it has established state-of-the-art laboratories for basic research and has organised its academic degree programs through departments, while coordinating research activities through Centers for Technologies.
+        </p>
+      </div>
+
+      <div class="tab-pane fade" id="about5">
+        <div class="text-center mb-3">
+          <img src="assets/images/jodhpur.jpg" alt="Jodhpur City" style="width:100%; aspect-ratio: 7795 / 3838; object-fit:cover; border-radius:6px;">
+        </div>
+        <p style="text-align: justify;"><strong>About Jodhpur: The Blue City</strong><br>
+        Jodhpur, the second-largest city in Rajasthan, is a captivating blend of ancient history and modern dynamism. Known globally as the "Blue City" for the iconic azure-hued houses surrounding the majestic Mehrangarh Fort, it offers a glimpse into India's rich royal heritage and architectural brilliance.
+        </p>
+
+        <p style="text-align: justify;"><strong>Historical Grandeur</strong><br>
+        Founded in 1459 by Rao Jodha, the city served as the capital of the Marwar kingdom. Today, it stands as a testament to Rajputana courage and artistic finesse. The city's skyline is dominated by Mehrangarh Fort, one of the largest and most well-preserved forts in India, offering breathtaking views of the "Blue City" below.
+        </p>
+
+        <p style="text-align: justify;"><strong>Key Attractions</strong></p>
+        <ul>
+          <li><strong>Mehrangarh Fort:</strong> A formidable citadel housing intricate palaces, sprawling courtyards, and a world-class museum.</li>
+          <li><strong>Jaswant Thada:</strong> An elegant white marble cenotaph, often referred to as the "Taj Mahal of Marwar," situated amidst serene lakeside gardens.</li>
+          <li><strong>Umaid Bhawan Palace:</strong> A magnificent 20th-century palace that remains the principal residence of Jodhpur’s royal family and is one of the largest private residences in the world.</li>
+          <li><strong>The Old City & Clock Tower:</strong> A vibrant hub of traditional markets, where delegates can experience the colors, spices, and famous textiles of Rajasthan.</li>
+        </ul>
+
+        <p style="text-align: justify; margin-top: 10px;">
+        <em>We look forward to welcoming you to this historic desert jewel.</em>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Themes -->
+<section id="themes" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Themes</h4>
+    <ul>
+      <li>Advanced Materials</li>
+      <li>Nanotechnology</li>
+      <li>Energy Materials</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Dates -->
+<section id="dates" class="section">
+  <div class="container content-box">
+    <div class="row">
+      
+      <!-- Left: Important Dates -->
+      <div class="col-md-8">
+        <h4 class="section-title">Important Dates</h4>
+        <ul>
+          <li><strong>Abstract Submission Opening:</strong> 01 May 2026</li>
+          <li><strong>Abstract Submission Last Date:</strong> 15 July 2026</li>
+          <li><strong>Abstract Acceptance Notification:</strong> 10 August 2026</li>
+          <li><strong>Early Bird Registration Start Date:</strong> 15 August 2026</li>
+          <li><strong>Early Bird Registration Last Date:</strong> 05 September 2026</li>
+          <li><strong>Regular Registration Last Date:</strong> 10 October 2026</li>
+        </ul>
+      </div>
+
+      <!-- Right: Countdown -->
+      <div class="col-md-4 text-end">
+        <h5 style="margin-top:10px;">Countdown</h5>
+        <div id="countdown" class="countdown"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const countdownDate = new Date("Oct 23, 2026 00:00:00").getTime();
+
+  const x = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "Conference Started";
+    }
+  }, 1000);
+</script>
+
+<!-- Committee -->
+<section id="committee" class="section">
+  <div class="container content-box committee-section">
+    <h4 class="section-title">Organizing Committee</h4>
+
+    <!-- Patron (centered) -->
+    <div class="group-title">Patron / Patrons</div>
+    <div class="row justify-content-center">
+      <div class="col-md-4 col-sm-6 member">
+        <img src="assets/images/patron.jpg" class="member-img img-patron" alt="Patron">
+        <div class="member-name">Prof. Avinash Kumar Agarwal</div>
+        <div class="member-aff">Director, IIT Jodhpur</div>
+      </div>
+    </div>
+    
+<!-- Honorary Organizing Chair (centered) -->
+    <div class="group-title">Honorary Organizing Chair</div>
+    <div class="row justify-content-center">
+      <div class="col-md-4 col-sm-6 member">
+        <img src="assets/images/Honorary Organizing Chair.jpg" class="member-img img-honorary" alt="Honorary Organizing Chair" loading="eager">
+        <div class="member-name">Prof. Bhabani Kumar Satapathy</div>
+        <div class="member-aff">Deputy Director, IIT Jodhpur <br>
+          Head, Department of Materials Engineering</div>
+      </div>
+    </div>
+    <!-- Organizing Chair -->
+    <div class="group-title">Organizing Chair</div>
+    <div class="row justify-content-center">
+      <div class="col-md-4 col-sm-6 member">
+        <img src="assets/images/member2.jpg" class="member-img img-chair" alt="Chair">
+        <div class="member-name">Dr. Name</div>
+        <div class="member-aff">Department of Materials Engineering, IIT Jodhpur</div>
+      </div>
+    </div>
+
+    <!-- Co-Chair / Convenor / Organizing Secretary -->
+    <div class="group-title">Co-Chair / Convenor / Organizing Secretary</div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6 member">
+        <img src="assets/images/member3.jpg" class="member-img img-co" alt="Co-Chair">
+        <div class="member-name">Dr. Name</div>
+        <div class="member-aff">IIT Jodhpur</div>
+      </div>
+      <div class="col-md-3 col-sm-6 member">
+        <img src="assets/images/member3.jpg" class="member-img img-co" alt="Co-Chair">
+        <div class="member-name">Dr. Name</div>
+        <div class="member-aff">IIT Jodhpur</div>
+      </div>
+      <div class="col-md-3 col-sm-6 member">
+        <img src="assets/images/member3.jpg" class="member-img img-co" alt="Co-Chair">
+        <div class="member-name">Dr. Name</div>
+        <div class="member-aff">IIT Jodhpur</div>
+      </div>
+      <div class="col-md-3 col-sm-6 member">
+        <img src="assets/images/member3.jpg" class="member-img img-co" alt="Co-Chair">
+        <div class="member-name">Dr. Name</div>
+        <div class="member-aff">IIT Jodhpur</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Programme -->
+<section id="programme" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Programme</h4>
+    <ul>
+      <li><strong>Day Wise Plan</strong></li>
+      <li><strong>Panel Discussions</strong></li>
+      <li><strong>Plenary Lectures</strong></li>
+      <li><strong>Special Session</strong></li>
+      <li><strong>Technical Sessions</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Logistics -->
+<section id="logistics" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Logistics</h4>
+    <ul>
+      <li><strong>Accommodation</strong></li>
+      <li><strong>Travel</strong></li>
+      <li><strong>Visa Information</strong></li>
+      <li><strong>Sitemap and General Information</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Abstract -->
+<section id="abstract" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Abstract Submission</h4>
+    <p>Details regarding abstract submission guidelines, templates, and deadlines will be updated soon.</p>
+  </div>
+</section>
+
+<!-- Registration -->
+<section id="registration" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Registration</h4>
+    <p>Registration details and fee structure will be updated soon.</p>
+  </div>
+</section>
+
+<!-- Sponsorship & Exhibition -->
+<section id="sponsorship" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Sponsorship & Exhibition</h4>
+    <p>Information about sponsorship opportunities and exhibition participation will be updated soon.</p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Contact</h4>
+    
+    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span style="color:#000;">to be announced</span></p>
+    <p><i class="fas fa-phone"></i> <strong>Phone:</strong> 0291 280 1552</p>
+  </div>
+</section>
+
+<!-- Site Statistics -->
+<section class="section">
+  <div class="container content-box">
+    <h4 class="section-title">Site Statistics</h4>
+
+    <div class="row text-center mt-4 justify-content-center">
+      <div class="col-md-4 col-lg-3 mb-3">
+        <div class="stat-card">
+          <i class="fas fa-user-check stat-icon"></i>
+          <div class="stat-number" id="todayVisitors">0</div>
+          <div class="stat-label">Today Visitors</div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-lg-3 mb-3">
+        <div class="stat-card">
+          <i class="fas fa-users stat-icon"></i>
+          <div class="stat-number" id="visitorCount">0</div>
+          <div class="stat-label">Total Visitors</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .stat-card {
+    background:#f8f9fa;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    transition:all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform:translateY(-5px);
+    box-shadow:0 6px 18px rgba(0,0,0,0.2);
+  }
+
+  .stat-icon {
+    font-size:28px;
+    color:#8B0000;
+    margin-bottom:10px;
+  }
+
+  .stat-number {
+    font-size:32px;
+    font-weight:700;
+    color:#002147;
+  }
+
+  .stat-label {
+    font-size:14px;
+    color:#555;
+    margin-top:5px;
+  }
+</style>
+
+<script>
+  // Simple local storage based counter (for demo)
+
+  // Total visitors
+  let visitors = localStorage.getItem("visitors") || 0;
+  visitors++;
+  localStorage.setItem("visitors", visitors);
+  document.getElementById("visitorCount").innerText = visitors;
+
+  
+
+  // Today visitors (reset daily)
+  let today = new Date().toDateString();
+  let lastVisitDate = localStorage.getItem("lastVisitDate");
+  let todayCount = localStorage.getItem("todayVisitors") || 0;
+
+  if (lastVisitDate === today) {
+    todayCount++;
+  } else {
+    todayCount = 1;
+    localStorage.setItem("lastVisitDate", today);
+  }
+
+  localStorage.setItem("todayVisitors", todayCount);
+  document.getElementById("todayVisitors").innerText = todayCount;
+</script>
+
+<footer>
+  <div class="container text-center">
+
+    <div class="footer-top">
+      <div><strong>i-CAM 2026</strong> | Indian Institute of Technology Jodhpur</div>
+      <div class="footer-links mt-2">
+        <a href="#about">About</a>
+        <a href="#programme">Programme</a>
+        <a href="#registration">Registration</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 i-CAM | IIT Jodhpur. All Rights Reserved.
+    </div>
+
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
