@@ -17,7 +17,7 @@
       border-bottom:3px solid #8B0000;
       padding:10px 0;
     }
-    .iit-header img { height:80px; }
+    .iit-header img { height:80px; object-fit:contain; }
     .iit-title { font-size:22px; font-weight:bold; color:#002147; }
     .iit-subtitle { font-size:18px; }
 
@@ -59,74 +59,159 @@
       color:#fff;
     }
 
-    /* Hero with background image */
-    /* Hero with background image */
-    .hero {
-      position: relative;
-      background: url('assets/images/hero.jpeg') center/cover no-repeat;
-      width: 100%;
-      aspect-ratio: 14400 / 6336; /* maintain original image proportion */
-      max-height: 600px; /* prevents excessive height on large screens */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: #fff;
-    }
+    /* Premium Hero Slider */
+.hero {
+  position: relative;
+  width: 100%;
+  max-height: 600px;
+  overflow: hidden;
+}
 
-    /* Dark overlay for readability */
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
+.hero .carousel-item {
+  height: 65vh;
+  min-height: 420px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .hero > * {
-      position: relative;
-      z-index: 2;
-    }
+/* Smart video framing */
+.hero .carousel-item video,
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center; /* default focus */
+}
 
-    .hero-content {
-      text-align: center;
-      max-width: 900px;
-    }
+/* Adjust framing based on screen */
+@media (max-width: 768px) {
+  .hero-video {
+    object-position: center top; /* avoid cropping important top content */
+  }
+}
 
-    .hero-subtitle {
-      font-size: 28px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
+@media (min-width: 1200px) {
+  .hero-video {
+    object-position: center 40%; /* slightly shift for better composition */
+  }
+}
 
-    .hero-title {
-      font-size: clamp(28px, 5vw, 48px);
-      font-weight: 700;
-      margin-bottom: 10px;
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 1px;
-    }
+.hero .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoomIn 12s ease-in-out infinite;
+}
 
-    /* Strong italic for logo-style 'i' */
-    .hero-title i {
-      font-style: italic;
-      display: inline-block;
-      transform: skewX(-15deg);
-    }
+/* Fix video sizing in hero (show full video) */
+.hero .carousel-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* show full video without cropping */
+  background: #000; /* fill empty space */
+  display: block;
+}
 
-    /* Strong italic for logo-style 'i' */
-    .hero-title i {
-      font-style: italic;
-      display: inline-block;
-      transform: skewX(-12deg);
-    }
+/* Smooth zoom (Ken Burns effect) */
+@keyframes zoomIn {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
 
-    .hero-date {
-      font-size: 20px;
-      margin-top: 5px;
-    }
+/* Gradient overlay for premium look */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+  z-index: 1;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+
+  /* Reduced width box */
+  width: auto;
+  max-width: 700px;
+
+  background: rgba(0, 0, 0, 0.55);
+  padding: 15px 20px;
+  border-radius: 10px;
+  
+}
+
+.hero-subtitle {
+  font-size: clamp(16px, 3vw, 28px);
+  font-weight: 500;
+  margin-bottom: 8px;
+  white-space: nowrap; /* keep in one line */
+}
+
+.hero-title {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+}
+
+.hero-title i {
+  font-style: italic;
+  display: inline-block;
+  transform: skewX(-15deg);
+}
+
+.hero-date {
+  font-size: clamp(14px, 2.5vw, 20px);
+  margin-top: 5px;
+}
+
+/* Carousel controls styling */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.carousel-indicators .active {
+  background-color: #FFD700;
+}
+
+/* Subtle text animations */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero-subtitle,
+.hero-title,
+.hero-date {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+.hero-subtitle { animation-delay: 0.3s; }
+.hero-title { animation-delay: 0.6s; }
+.hero-date { animation-delay: 0.9s; }
 
     /* Countdown Timer */
     .countdown {
@@ -322,7 +407,25 @@
       margin-top: 12px; /* uniform spacing from image */
     }
     .member-aff { color: #555; font-size: 14px; }
-  </style>
+  .iit-logo-right { height:80px; object-fit:contain; }
+/* Preloader */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #002147;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+</style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-THME9T4XE9"></script>
   <script>
@@ -335,6 +438,9 @@
 </head>
 
 <body>
+
+<!-- Preloader -->
+<div id="preloader">Loading i-CAM 2026...</div>
 
 <!-- Social Bar -->
 <div class="social-bar">
@@ -354,7 +460,7 @@
         <div class="iit-subtitle">Indian Institute of Technology Jodhpur</div>
       </div>
     </div>
-    <img src="assets/images/icam_logo.png">
+    <img src="assets/images/icam_logo_hd.jpg" class="iit-logo-right">
   </div>
 </div>
 
@@ -367,6 +473,7 @@
 
     <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
       <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#themes">Themes</a></li>
         <li class="nav-item"><a class="nav-link" href="#dates">Important Dates</a></li>
@@ -383,14 +490,80 @@
   </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero">
+<!-- Hero Slider -->
+<section id="home" class="hero">
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="hover">
+
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="5"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="6"></button>
+    </div>
+
+    <div class="carousel-inner">
+
+      <!-- 1. IIT Jodhpur Identity -->
+      <div class="carousel-item active">
+        <img src="assets/images/iitj_aerial.jpg" alt="IIT Jodhpur Campus">
+      </div>
+
+      <!-- 2. Abstract Materials Visual -->
+      <div class="carousel-item">
+        <img src="assets/images/hero.jpeg" alt="Applied Materials">
+      </div>
+
+      <!-- 3. Advanced Nanomaterials -->
+      <div class="carousel-item">
+        <img src="assets/images/nano_red.jpeg" alt="Nanomaterials">
+      </div>
+
+      <!-- 4. Microstructure -->
+      <div class="carousel-item">
+        <img src="assets/images/microstructure.jpeg" alt="Microstructure">
+      </div>
+
+      <!-- 5. Functional / Polymer Materials -->
+      <div class="carousel-item">
+        <img src="assets/images/polymer.jpeg" alt="Polymer Materials">
+      </div>
+
+      <!-- 6. New Scientific Visual (before video) -->
+      <div class="carousel-item">
+        <img src="assets/images/advanced_wave.jpeg" alt="Advanced Materials Dynamics">
+      </div>
+
+      <!-- 7. Video Slide -->
+      <div class="carousel-item">
+        <video id="heroVideo" class="w-100 h-100 hero-video" muted playsinline>
+          <source src="assets/videos/hero_video.mp4" type="video/mp4">
+          <source src="assets/videos/hero_video.mov" type="video/quicktime">
+        </video>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+
+  </div>
+
   <div class="hero-content">
     <h3 class="hero-subtitle">International Conference on Applied Materials</h3>
     <h1 class="hero-title"><b><i>i</i>-CAM 2026</b></h1>
     <p class="hero-date"><b>23–25 October 2026 | IIT Jodhpur</b></p>
   </div>
-    </section>
+</section>
 
 
 
@@ -429,6 +602,9 @@
       </div>
 
       <div class="tab-pane fade" id="about4">
+        <div class="text-center mb-3">
+          <img src="assets/images/iitj_campus2.png" alt="IIT Jodhpur Campus" style="width:100%; aspect-ratio: 16/7; object-fit:cover; border-radius:6px;">
+        </div>
         <p style="text-align: justify;">
         Indian Institute of Technology Jodhpur was established in 2008 to foster technology education and research in India. The Institute is committed to technological thought and action to benefit the economic development of the country. Scholarship in teaching and learning, scholarship in research and creative accomplishments, and relevance to industry are the three driving forces at IIT Jodhpur.
         </p>
@@ -476,9 +652,15 @@
   <div class="container content-box">
     <h4 class="section-title">Themes</h4>
     <ul>
-      <li>Advanced Materials</li>
-      <li>Nanotechnology</li>
-      <li>Energy Materials</li>
+      <li>Advanced Materials Processing and Manufacturing</li>
+      <li>Sustainable, Green, and Circular Materials</li>
+      <li>Porous, Foam, and Aerogel-Based Materials</li>
+      <li>High-Performance Structural Materials and Reinforced Composites</li>
+      <li>Functional Nanomaterials and Devices</li>
+      <li>Materials for Biomedical and Healthcare Applications</li>
+      <li>Energy Materials for Conversion, Storage, and Devices</li>
+      <li>Artificial Intelligence, Machine Learning, and Big Data in Materials Engineering</li>
+      <li>Electronic, Photonic, Quantum Materials</li>
     </ul>
   </div>
 </section>
@@ -635,7 +817,49 @@
 <section id="registration" class="section">
   <div class="container content-box">
     <h4 class="section-title">Registration</h4>
-    <p>Registration details and fee structure will be updated soon.</p>
+
+    <p><strong>Registration Fee (including GST):</strong></p>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Category</th>
+            <th class="text-center">Indian</th>
+            <th class="text-center">International</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Faculty</td>
+            <td class="text-center">₹ 5900</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Students</td>
+            <td class="text-center">₹ 3540</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Personnel from Industries / R&amp;D Organizations</td>
+            <td class="text-center">₹ 11800</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:13px; color:#555;">
+      * USD values will be updated soon.
+    </p>
+
+    <!-- Registration Button -->
+    <div class="text-center mt-3">
+      <a href="#" class="btn btn-danger" style="padding:10px 25px; font-weight:600;">
+        Register Now
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -765,6 +989,49 @@
 
   </div>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const carouselEl = document.getElementById('heroCarousel');
+  let carousel;
+
+window.addEventListener('load', function () {
+  // Hide preloader
+  document.getElementById('preloader').style.display = 'none';
+
+  // Initialize carousel AFTER everything loads
+  carousel = new bootstrap.Carousel(carouselEl, {
+    interval: 4000,
+    pause: false,
+    ride: 'carousel',
+    wrap: true
+  });
+});
+
+  const video = document.getElementById('heroVideo');
+
+  // When slide changes
+  carouselEl.addEventListener('slid.bs.carousel', function (e) {
+    const activeItem = e.relatedTarget;
+    const vid = activeItem.querySelector('video');
+
+    if (vid) {
+      // Pause carousel and play video once
+      carousel.pause();
+      vid.currentTime = 0;
+      vid.play();
+
+      vid.onended = function () {
+        carousel.next();
+        setTimeout(() => carousel.cycle(), 500);
+      };
+    } else {
+      // If not video, ensure any video is paused
+      if (video) video.pause();
+      carousel.cycle();
+    }
+  });
+</script>
 </body>
 </html>
